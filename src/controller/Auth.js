@@ -18,14 +18,14 @@ const signUp = async (req,res)=>{
                 password:encrypt_password
             })
             await Newuser.save()
-            res.status(200).json({isSuccess:"true",message:"",result:Newuser})
+            res.status(200).json({statuscode:"200",isSuccess:"true",message:"",result:Newuser})
         }
         else{
-            res.status(400).json({isSuccess:"false",message:"User Already Exist",result:[]})
+            res.status(200).json({statuscode:"400",isSuccess:"false",message:"User Already Exist",result:[]})
         }
     }
     catch(err){
-     res.status(500).json({isSuccess:"false",message:err.message,result:[]})
+     res.status(200).json({statuscode:"400",isSuccess:"false",message:err.message,result:[]})
     }
    
 }
@@ -40,17 +40,17 @@ const login = async (req,res)=>{
            if(comparepassword ){ 
             let token = JWT.sign({...ExistingUser.toJSON()},process.env.TOKEN_SECRET,{expiresIn:'7d'})
             
-            res.status(200).json({isSuccess:"true",message:"Login Successfull",result:{ExistingUser,token:token}}) 
+            res.status(200).json({statuscode:"200",isSuccess:"true",message:"Login Successfull",result:{ExistingUser,token:token}}) 
             }
          else
-         { res.status(400).json({isSuccess:"false",errorMessage:"UserName Or Password Incorrect",result:[]})}
+         { res.status(200).json({statuscode:"400",isSuccess:"false",errorMessage:"UserName Or Password Incorrect",result:[]})}
         }
         else{
-            res.status(400).json({isSuccess:"false",message:"User Dose Not Exist",result:[]})
+            res.status(200).json({statuscode:"400",isSuccess:"false",message:"User Dose Not Exist",result:[]})
         }
     } 
     catch(err){
-        res.status(500).json({isSuccess:"false",message:err.message,result:[]})
+        res.status(200).json({statuscode:"400",isSuccess:"false",message:err.message,result:[]})
        }
     
 }
@@ -102,16 +102,16 @@ const forgotpasswordmail= async(email,token)=>{
        try{
            const userData=await User.findOne({email:req.body.email})
            if(!userData){
-               res.status(200).json({isSuccess:"false",message:"User dose not exist",result:[]})
+               res.status(200).json({statuscode:"400",isSuccess:"false",message:"User dose not exist",result:[]})
            }
            else{
                const Randomstring = randomstring.generate();
                const user= await User.findOneAndUpdate({email:req.body.email},{$set:{token:Randomstring}},{new:true})
                 forgotpasswordmail(userData.email,Randomstring)
-               res.status(400).json({isSuccess:"true",message:"please check your mail inbox",result:{user:user}})
+               res.status(200).json({statuscode:"200",isSuccess:"true",message:"please check your mail inbox",result:{user:user}})
            }
        }catch(err){
-           res.status(400).json({isSuccess:"false",message:error.message,result:[]})
+           res.status(200).json({statuscode:"400",isSuccess:"false",message:error.message,result:[]})
        }
    }
    
