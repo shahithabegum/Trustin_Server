@@ -23,8 +23,12 @@ app.use("/api",auth)
 const company=require('./src/routes/CompanyRoute')
 app.use("/api",company)
 
+//Notification Middleware
+const notification=require('./src/routes/NotificationRoute')
+app.use("/api",notification)
 //UserRoute Middleware
 const user=require('./src/routes/UserRoute')
+
 app.use("/api",user)
 
 //multer configuration
@@ -42,6 +46,9 @@ const upload=multer({storage:storage,limits:{fieldSize:maxSize}});
 app.post('/api/upload',upload.single("img"),(req,res)=>{
     res.status(200).json({statuscode:"200",isSuccess:"true",message:"image uploades sucessfully",result:req.file})
 })
+
+
+
 //DB Connection 
 mongoose.connect(process.env.MongoDB_URL).then(()=>{
     console.log("DB Connected SuccessFully")
