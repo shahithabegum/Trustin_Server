@@ -18,7 +18,7 @@ const signUp = async (req,res)=>{
                 password:encrypt_password
             })
             await Newuser.save()
-            res.status(200).json({statuscode:"200",isSuccess:"true",message:"",result:Newuser})
+            res.status(200).json({statuscode:"200",isSuccess:"true",message:"Account Created",result:Newuser})
         }
         else{
             res.status(200).json({statuscode:"400",isSuccess:"false",message:"User Already Exist",result:[]})

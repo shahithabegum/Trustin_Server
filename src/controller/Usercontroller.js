@@ -38,9 +38,9 @@ const getbyId = async (req,res)=>{
 
 const updateUser = async (req,res)=>{
     try{
-        const users= await User.findById({_id:req.params._id})
+        const users= await User.findOne({email:req.body.email})
         if(users){ 
-            const updateuser = await User.findOneAndUpdate({email:users.email},req.body,{new:true})
+            const updateuser = await User.findOneAndUpdate({email:req.body.email},req.body,{new:true})
             if(updateuser){
                 res.status(200).json({isSuccess:"true",message:"Updated successfully",result:updateuser}) 
             }else{
@@ -48,6 +48,9 @@ const updateUser = async (req,res)=>{
                }
             
         }
+        else{
+            res.status(400).json({isSuccess:"false",message:"Something user Wrong",result:[]})
+           }
         
     }
     catch(err){

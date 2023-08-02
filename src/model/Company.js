@@ -5,7 +5,7 @@ new mongoose.Schema({
     companyname:{
         type:String,
         required:true,
-        unique:true,
+        
     },
     useremail:{
         type:String,
@@ -14,7 +14,7 @@ new mongoose.Schema({
     companyemail:{
         type:String,
         required:true,
-        unique:true,
+       
     },
     companylocation:{
         type:String,
@@ -25,7 +25,13 @@ new mongoose.Schema({
     },
     network:{
         type:Array,
-        default:[]
+        default:[{companyname:{
+            type:String
+           },
+           user:{
+            type:String
+           }}]
+       
     }
 },{timestamps:true}))
 
