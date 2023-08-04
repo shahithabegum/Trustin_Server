@@ -11,7 +11,7 @@ new mongoose.Schema({
         type:String,
         required:true,
     },
-    companyemail:{
+    companywebsite:{
         type:String,
         required:true,
        
@@ -22,16 +22,11 @@ new mongoose.Schema({
     },
     profileimgae:{
         type:String,
+        default:"image\\cover.jpg"
     },
     network:{
         type:Array,
-        default:[{companyname:{
-            type:String
-           },
-           user:{
-            type:String
-           }}]
-       
+        default:[]
     }
 },{timestamps:true}))
 

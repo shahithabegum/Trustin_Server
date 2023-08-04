@@ -10,7 +10,7 @@ const createCompanyprofile = async (req,res)=>{
                     const NewProfile = new Company({
                     companyname:req.body.companyname,
                     useremail:req.body.useremail,
-                    companyemail:req.body.companyemail,
+                    companywebsite:req.body.companywebsite,
                     profileimgae:req.body.profileimgae,
                     companylocation:req.body.companylocation
                 })
@@ -64,13 +64,22 @@ const connectCompany = async(req,res)=>{
         try{
             const myaccount = await Company.findOne({useremail:req.body.useremail})
             const connectuser = await Company.findOne({useremail:req.params.useremail})
-            if(connectuser){
+            let check = []
+            const count = myaccount.network.filter((item)=>{
+                console.log(item)
+              if (item.user==req.params.useremail){
+                check=item.user
+              } 
+            })
+           console.log("check",check)
+        
+            if(check.length === 0){
                 await connectuser.updateOne({$push:{network:{user:req.body.useremail,companyname:myaccount.companyname}}})
-                await myaccount.updateOne({$push:{network:{user:req.body.useremail,companyname:connectuser.companyname}}})
-                res.status(200).json({statuscode:"200",isSuccess:"true",message:"conection success",result:[]})
+                await myaccount.updateOne({$push:{network:{user:req.params.useremail,companyname:connectuser.companyname}}})
+                res.status(200).json({statuscode:"200",isSuccess:"true",message:"connection success",result:[]})
             }
             else{
-                res.status(200).json({statuscode:"400",isSuccess:"false",message:"Something Went Wrong",result:[]})
+                res.status(200).json({statuscode:"400",isSuccess:"false",message:"Already in your network",result:[]})
             }
            
         }

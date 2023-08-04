@@ -13,6 +13,13 @@ new mongoose.Schema({
     type:{
         type:String,
         require:true
+    },
+    read:{
+        type:String,
+       default:"unread"
+    },
+    sender:{
+        type:String,
     }
 },{
     timestamps:true

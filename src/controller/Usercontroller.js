@@ -1,5 +1,5 @@
 const User = require('../model/Usermodel')
-
+const {hasspassword} =require('../passwordEncrypt')
 //get all user
 const getAllUser = async (req,res)=>{
     try{
@@ -57,9 +57,26 @@ const updateUser = async (req,res)=>{
         res.status(500).json({isSuccess:"false",message:err.message,result:[]})
        }
 }
-
+//change password
+const changePassword = async (req, res)=>{
+    try{
+        const users= await User.findOne({email:req.body.email})
+        if(users){
+            const encryptpassword= await hasspassword(req.body.password)
+            const passwordchanged = await User.findOneAndUpdate({email:req.body.email},{$set:{password:encryptpassword,newuser:"false"}},{new:true})
+          res.status(200).json({isSuccess:"true",message:"Password Changed Successfully",result:passwordchanged}) 
+      }
+         else{
+          res.status(400).json({isSuccess:"false",message:"Something Went Wrong",result:[]})
+         }
+      }
+      catch(err){
+          res.status(500).json({isSuccess:"false",message:err.message,result:[]})
+         }
+}
 module.exports={
     getAllUser,
     getbyId,
-    updateUser
+    updateUser,
+    changePassword
 }

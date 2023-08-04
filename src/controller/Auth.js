@@ -39,11 +39,10 @@ const login = async (req,res)=>{
             
            if(comparepassword ){ 
             let token = JWT.sign({...ExistingUser.toJSON()},process.env.TOKEN_SECRET,{expiresIn:'7d'})
-            
             res.status(200).json({statuscode:"200",isSuccess:"true",message:"Login Successfull",result:{ExistingUser,token:token}}) 
             }
          else
-         { res.status(200).json({statuscode:"400",isSuccess:"false",errorMessage:"UserName Or Password Incorrect",result:[]})}
+         { res.status(200).json({statuscode:"400",isSuccess:"false",message:"UserName Or Password Incorrect",result:[]})}
         }
         else{
             res.status(200).json({statuscode:"400",isSuccess:"false",message:"User Dose Not Exist",result:[]})

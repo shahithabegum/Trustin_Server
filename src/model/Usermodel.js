@@ -16,22 +16,21 @@ new mongoose.Schema({
         required:true,
     },
     profileimg:{
-        type:String
+        type:String,
+        default:"image\\download.jpg"
     },
     password:{
         type:String,
         required:true,
     },
-    newuser:{
-        type:String,
-        default:"true"
-    },
+   
     token:{
         type:String
     },
     authtoken:{
         type:String
-    }
+    },
+  
 },{timestamps:true}))
 
 module.exports = User
