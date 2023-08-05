@@ -10,7 +10,11 @@ require('dotenv').config()
 const app=express()
 app.use(bodyParser.json())
 app.use(cors())
-
+//test
+app.get('/gettest', (req, res) => {
+    res.send('Hello from Node.js server running on port 3300! node:18.14.1-alpine3.17 npm start');
+  });
+  
 //static folder
 app.use(express.static(path.join(__dirname,'public')));
 app.use('/image',express.static("./image"))
