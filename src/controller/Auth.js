@@ -56,7 +56,7 @@ const login = async (req,res)=>{
 //forgotpassword mail
 const forgotpasswordmail= async(email,token)=>{
     const transpoter=nodemailer.createTransport({
-       host:"smtp.gmail.com",
+       host:"smtp.ethereal.email",
        port:587,
        secure:false,
        requireTLS:true,
