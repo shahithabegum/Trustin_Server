@@ -30,7 +30,7 @@ const createCompanyprofile = async (req,res)=>{
         res.status(200).json({statuscode:"400",isSuccess:"false",message:err.message,result:[]})
     }
 }
-// company drowp down
+// get All Company details
 const getAll = async (req,res)=>{
     try{
         const companyList = await Company.find()
@@ -59,6 +59,8 @@ const getByUser = async (req,res)=>{
         res.status(200).json({statuscode:"400",isSuccess:"false",message:err.message,result:[]})
     }
 }
+
+//connect Company method
 const connectCompany = async(req,res)=>{
     if(req.body.useremail !== req.params.useremail){
         try{

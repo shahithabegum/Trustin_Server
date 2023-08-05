@@ -9,11 +9,9 @@ require('dotenv').config()
 
 const app=express()
 app.use(bodyParser.json())
+//cors origin setup
 app.use(cors())
-//test
-app.get('/gettest', (req, res) => {
-    res.send('Hello from Node.js server running on port 3300! node:18.14.1-alpine3.17 npm start');
-  });
+
   
 //static folder
 app.use(express.static(path.join(__dirname,'public')));
@@ -45,8 +43,11 @@ const storage = multer.diskStorage({
     }
     
 })
+
 let maxSize= 2*1000*1000;
+
 const upload=multer({storage:storage,limits:{fieldSize:maxSize}});
+//image upload api
 app.post('/api/upload',upload.single("img"),(req,res)=>{
     res.status(200).json({statuscode:"200",isSuccess:"true",message:"image uploades sucessfully",result:req.file})
 })

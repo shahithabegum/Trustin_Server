@@ -1,5 +1,7 @@
 const JWT = require ('jsonwebtoken')
 require('dotenv').config()
+
+//Auth Token verification
 const authToken = (req,res,next)=>{
     JWT.verify(
         req.headers["x-access-token"],

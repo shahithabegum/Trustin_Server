@@ -1,5 +1,7 @@
 const Notification = require('../model/Notification')
 
+
+//Generate Notification method
 const generateNotification = async (req,res)=>{
     try{
         const notification = new Notification({
@@ -16,6 +18,7 @@ const generateNotification = async (req,res)=>{
     }
     
 }
+//get notification depands on user
 const getNotification = async (req,res)=>{
     try{
         const mysort ={createdAt:-1}
@@ -30,7 +33,7 @@ const getNotification = async (req,res)=>{
         res.status(200).json({statuscode:"400",isSuccess:"false",message:err.message,result:[]})
     }
 }
-// Unread message 
+// manage Unread message 
 const unRead = async (req,res) =>{
    try{
      const message = await Notification.findOne({_id:req.params._id})
@@ -45,7 +48,8 @@ catch(err){
     res.status(200).json({statuscode:"400",isSuccess:"false",message:err.message,result:[]})
 }
 }
-//Reaject 
+
+//Reaject notification
 const rejectNotification = async (req,res) =>{
     try{
         const deletenotification = await Notification.findByIdAndDelete({_id:req.params._id})
