@@ -80,7 +80,7 @@ const forgotpasswordmail= async(email,token)=>{
            <div style="margin:0 auto;width:70% ;padding:10px">
            <h1 style="text-align: center;">Password Reset</h1>
            <p style="font-size: 16px;text-align: center;">If you've lost your password or wish to reset it,use the link below to get started </p>
-            <button Style="width:max-content;padding:10px;background-color:blue;margin-left:40%;border:none"> <a href="https://64ce7ffd30bde65547e99885--jolly-frangollo-749ac0.netlify.app/resetpassword?token=`+token+`" style="text-decoration: none;color:white">Reset Your Passwotd</a></button>
+            <button Style="width:max-content;padding:10px;background-color:blue;margin-left:40%;border:none"> <a href="http:localhost:3000/resetpassword?token=`+token+`" style="text-decoration: none;color:white">Reset Your Passwotd</a></button>
            <p style="font-size: 16px;text-align: center;">if you did not request a password reset,you can safely ignore this email. Only a person with access to your email can reset your account password.</P>
            </div>    
        </body>
